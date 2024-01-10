@@ -38,7 +38,7 @@ jobs:
           run: python repo/get_dxvk.py # versions.plist, store dxvk version
 
         - name: Untar DXVK and move it to the Engine folder
-          run: tar -xzvf yourfile.tar.gz --strip-components=1 -C Engine/dxvk
+          run: tar -xzvf dxvk.tgz --strip-components=1 -C Engine/dxvk
   
         - name: Install latest staging build of wine
           run: brew install --cask wine-staging
