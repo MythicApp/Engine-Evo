@@ -48,8 +48,8 @@ jobs:
         - name: Move wine into Engine folder
           run: mv /Applications/Wine\ Staging.app/Contents/Resources/wine Engine
 
-        - name: Copy D3DMetal lib to Engine
-          run: ditto --update repo/lib Engine/wine
+        - name: Copy D3DMetal lib to Engine # ditto, cp -a
+          run: rsync -av --ignore-existing repo/lib/ Engine/wine/
 
         - name: Compress engine as .tar.xz
           run: tar -cJf Engine.txz Engine
