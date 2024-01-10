@@ -20,7 +20,7 @@ jobs:
         - name: Set up Python
           uses: actions/setup-python@v2
           with:
-            python-version: latest
+            python-version: stable
 
         - name: Create Engine folder
           run: mkdir -p Engine
