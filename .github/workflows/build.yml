@@ -52,7 +52,7 @@ jobs:
           run: ditto repo/lib Engine/wine
 
         - name: Compress engine as .tar.xz
-          run: tar -cJf Engine.txz -C Engine
+          run: tar -cJf Engine.txz Engine
   
         - name: Upload Archive
           uses: actions/upload-artifact@v2
