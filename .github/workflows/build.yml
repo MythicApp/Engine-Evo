@@ -43,7 +43,7 @@ jobs:
             tar -xzvf dxvk.tgz --strip-components=1 -C Engine/dxvk
   
         - name: Install latest staging build of wine
-          run: brew install --cask wine-staging
+          run: brew install -v --cask wine-staging
   
         - name: Move wine into Engine folder
           run: mv /Applications/Wine\ Staging.app/Contents/Resources/wine Engine
@@ -52,7 +52,7 @@ jobs:
           run: ditto repo/lib Engine/wine
 
         - name: Compress engine as .tar.xz
-          run: tar -cJf Engine.txz Engine
+          run: tar -cJvf Engine.txz Engine
   
         - name: Upload Archive
           uses: actions/upload-artifact@v2
