@@ -32,10 +32,10 @@ jobs:
         - name: Install python dependencies # todo: cache
           run: |
             python -m pip install --upgrade pip
-            pip install requests
+            pip install -r repo/py/requirements.txt
 
         - name: Execute python script to get DXVK
-          run: python repo/get_dxvk.py # versions.plist, store dxvk version
+          run: python repo/py/get_dxvk.py # versions.plist, store dxvk version
 
         - name: Untar DXVK and move it to the Engine folder
           run: |
