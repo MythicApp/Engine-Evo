@@ -43,7 +43,7 @@ jobs:
 
         - name: Download the latest winetricks script (master="latest version") and mark it as executable
           run: |
-            curl -ov winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+            curl -o winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
             chmod +x winetricks
 
         - name: Move winetricks into Engine folder
