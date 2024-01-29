@@ -26,8 +26,7 @@ jobs:
           run: mkdir -p Engine
 
         - name: Update taps
-          run: |
-            brew tap homebrew/cask-versions
+          run: brew tap homebrew/cask-versions
 
         - name: Install python dependencies # todo: cache
           run: |
@@ -41,6 +40,14 @@ jobs:
           run: |
             mkdir Engine/dxvk
             tar -xzvf dxvk.tgz --strip-components=1 -C Engine/dxvk
+
+        - name: Download the latest winetricks script (master="latest version") and mark it as executable
+          run: |
+            curl -o winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+            chmod +x winetricks
+
+        - name: Move winetricks into Engine folder
+          run: mv winetricks Engine
   
         - name: Install latest staging build of wine
           run: brew install -v --cask --no-quarantine wine-staging
