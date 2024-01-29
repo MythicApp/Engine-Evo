@@ -23,15 +23,15 @@ jobs:
             python-version: 3.12.1
 
         - name: Create Engine folder
-          run: mkdir -p Engine
+          run: mkdir -pv Engine
 
         - name: Update taps
           run: brew tap homebrew/cask-versions
 
         - name: Install python dependencies # todo: cache
           run: |
-            python -m pip install --upgrade pip
-            pip install -r repo/py/requirements.txt
+            python -v -m pip install --upgrade pip
+            pip install -v -r repo/py/requirements.txt
 
         - name: Execute python script to get DXVK
           run: python repo/py/get_dxvk.py # versions.plist, store dxvk version
@@ -43,7 +43,7 @@ jobs:
 
         - name: Download the latest winetricks script (master="latest version") and mark it as executable
           run: |
-            curl -o winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+            curl -ov winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
             chmod +x winetricks
 
         - name: Move winetricks into Engine folder
