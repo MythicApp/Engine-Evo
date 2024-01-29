@@ -56,7 +56,7 @@ jobs:
           run: mv /Applications/Wine\ Staging.app/Contents/Resources/wine Engine
 
         - name: Copy D3DMetal lib to Engine
-          run: ditto -V repo/lib Engine/wine
+          run: ditto -V repo/lib/ Engine/wine/lib/
 
         - name: Compress engine as .tar.xz
           run: tar -cJvf Engine.txz Engine
