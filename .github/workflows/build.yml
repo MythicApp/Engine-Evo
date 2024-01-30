@@ -1,10 +1,9 @@
 name: >
   Build Mythic Engine
 on:
-  workflow_dispatch:
-  push:
   schedule:
     - cron: "0 0 * * *"
+  workflow_dispatch:
     
 jobs:
   build:
@@ -17,24 +16,34 @@ jobs:
           with:
             path: repo
 
-        - name: Set up Python
-          uses: actions/setup-python@v2
-          with:
-            python-version: 3.12.1
-
         - name: Create Engine folder
           run: mkdir -pv Engine
 
         - name: Update taps
           run: brew tap homebrew/cask-versions
 
-        - name: Install python dependencies # todo: cache
+        - name: Install DXVK
           run: |
-            python -v -m pip install --upgrade pip
-            pip install -v -r repo/py/requirements.txt
-
-        - name: Execute python script to get DXVK
-          run: python repo/py/get_dxvk.py # versions.plist, store dxvk version
+            new_asset_name="dxvk.tgz" # NAME OF THE DOWNLOADED FILE
+            
+            json=$(curl -s "https://api.github.com/repos/doitsujin/dxvk/releases/latest")
+            
+            dxvk_version=$(echo "$json" | jq -r '.tag_name[1:]')
+            asset_name="dxvk-${dxvk_version}.tar.gz"
+            asset_url=$(echo "$json" | jq -r --arg asset_name "$asset_name" '.assets[] | select(.name == $asset_name) | .browser_download_url')
+            
+            if [ "$asset_url" == "null" ]; then
+                echo "Unable to locate $asset_name"
+                exit 1
+            fi
+            
+            echo "Downloading DXVK $dxvk_version: $asset_name"
+            if ! curl -L -o "$new_asset_name" "$asset_url"; then
+                echo "Failed to download DXVK $dxvk_version"
+                exit 1
+            fi
+            
+            echo "Successfully downloaded DXVK $dxvk_version as archive $new_asset_name"
 
         - name: Untar DXVK and move it to the Engine folder
           run: |
