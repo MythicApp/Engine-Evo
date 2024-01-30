@@ -1,6 +1,7 @@
 name: >
   Build Mythic Engine
 on:
+  push:
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
@@ -12,9 +13,7 @@ jobs:
     
     steps:
         - name: Checkout Repository
-          uses: actions/checkout@v2
-          with:
-            path: repo
+          uses: actions/checkout@v4
 
         - name: Create Engine folder
           run: mkdir -pv Engine
@@ -65,7 +64,7 @@ jobs:
           run: mv /Applications/Wine\ Staging.app/Contents/Resources/wine Engine
 
         - name: Copy D3DMetal lib to Engine
-          run: ditto -V repo/lib/ Engine/wine/lib/
+          run: ditto -V lib/ Engine/wine/lib/
 
         - name: Compress engine as .tar.xz
           run: tar -cJvf Engine.txz Engine
