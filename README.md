@@ -1,7 +1,7 @@
 <h1 align="center">
   <br>
   <a href="https://getmythic.app">
-    <img src="https://github.com/MythicApp/Engine-Evo/assets/41133734/63dc780c-244d-4c23-9635-a66479810599" 
+    <img src="https://github.com/MythicApp/Engine-Evo/assets/41133734/c388e351-94e9-4022-a58a-0842f7de4bab" 
       style="width: 20%; height: 20%;">
   </a>
 
