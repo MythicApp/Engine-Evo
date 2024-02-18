@@ -70,7 +70,7 @@ jobs:
           run: tar -cJvf Engine.txz Engine
   
         - name: Upload Archive
-          uses: actions/upload-artifact@v2
+          uses: actions/upload-artifact@v4
           with:
             name: Engine
             path: Engine.txz
